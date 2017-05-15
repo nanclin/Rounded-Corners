@@ -165,6 +165,7 @@ public class LineEditor : Editor {
             if (GUILayout.Button("X", GUILayout.Width(15), GUILayout.Height(15))) {
 //                RemovePoint(point);
                 Line.RemovePoint(i);
+                SelectedAnchorPoints.Clear();
                 SceneView.RepaintAll();
             }
             GUILayout.EndHorizontal();
