@@ -83,9 +83,9 @@ public class LineEditor : Editor {
         {// draw sample point
             if (!DrawSamplePoint) return;
             Ray ray = Line.GetPointOnLine(T);
-            DrawRay(ray, Color.green);
-            DrawRay(ray.origin, Utils.NormalR(ray.direction), Color.red);
-            DrawCrosshair(ray.origin, 0.1f, Color.white);
+            DrawRay(ray.origin, ray.direction * RayLength, Color.green);
+            DrawRay(ray.origin, Utils.NormalR(ray.direction) * RayLength, Color.red);
+            DrawCrosshair(ray.origin, 0.1f * RayLength, Color.white);
         }
     }
 
