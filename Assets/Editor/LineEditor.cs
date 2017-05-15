@@ -10,7 +10,6 @@ using System;
 public class LineEditor : Editor {
 
     static bool ShowSettings;
-    static bool DEBUG_MODE;
     static bool MaxSmoothStrength;
     static float HandleSize = 0.1f;
     static float RayLength = 0.5f;
@@ -104,8 +103,6 @@ public class LineEditor : Editor {
 
         EditorGUI.BeginChangeCheck();
 
-        DEBUG_MODE = GUILayout.Toggle(DEBUG_MODE, "DEBUG MODE");
-
         Line.ClosedLine = GUILayout.Toggle(Line.ClosedLine, "Closed Line");
 
         GUILayout.BeginHorizontal();
@@ -131,15 +128,12 @@ public class LineEditor : Editor {
         GUILayout.Label("Points", Bold);
 
         EditorGUI.BeginChangeCheck();
-        if (DEBUG_MODE) MaxSmoothStrength = GUILayout.Toggle(MaxSmoothStrength, "Max smooth");
         if (EditorGUI.EndChangeCheck()) {
             SceneView.RepaintAll();
         }
 
         for (int i = 0; i < Line.AnchorPoints.Count; i++) {
             AnchorPoint point = Line.AnchorPoints[i];
-
-            if (DEBUG_MODE) point.MaxStrength = MaxSmoothStrength;
 
             string[] pointTypes = System.Enum.GetNames(typeof(PointType));
 
@@ -191,11 +185,6 @@ public class LineEditor : Editor {
                     SceneView.RepaintAll();
                 }
                 EditorGUILayout.EndHorizontal();
-            }
-
-            if (DEBUG_MODE) {
-                GUILayout.Label("    Prev: " + (point.PreviousPoint != null ? point.PreviousPoint.Name : "null"));
-                GUILayout.Label("    Next: " + (point.NextPoint != null ? point.NextPoint.Name : "null"));
             }
         }
 
@@ -280,9 +269,6 @@ public class LineEditor : Editor {
 //        DrawRay(controlPoint.Position, controlPoint.Normal, Color.red);
 
         string label = controlPoint.Name;
-        if (DEBUG_MODE)
-        if (controlPoint.PointType == PointType.RoundedCorner)
-            label += (controlPoint.IsConvex ? " (CONVEX)" : " (CONCAVE)");
         Handles.Label(p0 + Vector3.right * 0.5f, label);
 
         if (EditorGUI.EndChangeCheck()) {
