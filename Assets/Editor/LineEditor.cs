@@ -196,8 +196,11 @@ public class LineEditor : Editor {
 
         if (GUILayout.Button("+", GUILayout.Width(18))) {
             Undo.RecordObject(Line, "Point added");
-            AnchorPoint lastPoint = Line.AnchorPoints[Line.AnchorPoints.Count - 1];
-            Line.AddPointAtTheEnd(lastPoint.Position + Vector2.right);
+            Vector3 newPosition = Vector3.zero;
+            if (Line != null && Line.AnchorPoints.Count > 0) {
+                newPosition = Line.AnchorPoints[Line.AnchorPoints.Count - 1].Position + Vector2.right;
+            }
+            Line.AddPointAtTheEnd(newPosition);
             SceneView.RepaintAll();
         }
     }
