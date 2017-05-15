@@ -45,6 +45,9 @@ public class LineEditor : Editor {
 
     public override void OnInspectorGUI() {
         //        DrawDefaultInspector();
+
+        EditorGUILayout.HelpBox("Shortcuts:\n Shift + 1 -> point type None\n Shift + 2 -> point type RoundedCorner", MessageType.Info);
+
         DrawInspectorSettings();
         DrawInspectorPointControls();
     }
@@ -397,13 +400,13 @@ public class LineEditor : Editor {
         if (LastSelectedPoint != null) {
             if (Event.current.shift) {
                 if (Event.current.type == EventType.keyDown) {
-                    if (Event.current.keyCode == KeyCode.Alpha1) {
+                    if (Event.current.keyCode == KeyCode.Alpha2) {
                         Undo.RecordObject(Line, "Change node type");
                         LastSelectedPoint.PointType = PointType.RoundedCorner;
                         LastSelectedPoint.RecalculateCornerValues();
                         SceneView.RepaintAll();
                     }
-                    if (Event.current.keyCode == KeyCode.Alpha0) {
+                    if (Event.current.keyCode == KeyCode.Alpha1) {
                         Undo.RecordObject(Line, "Change node type");
                         LastSelectedPoint.PointType = PointType.None;
                         LastSelectedPoint.RecalculateCornerValues();
