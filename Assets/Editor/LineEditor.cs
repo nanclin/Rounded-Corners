@@ -133,6 +133,16 @@ public class LineEditor : Editor {
 
         GUILayout.Label("Points", Bold);
 
+        if (GUILayout.Button("+", GUILayout.Width(18))) {
+            Undo.RecordObject(Line, "Point added");
+            Vector3 newPosition = Vector3.zero;
+            if (Line != null && Line.AnchorPoints.Count > 0) {
+                newPosition = Line.AnchorPoints[Line.AnchorPoints.Count - 1].Position + Vector2.right;
+            }
+            Line.AddPointAtTheEnd(newPosition);
+            SceneView.RepaintAll();
+        }
+
         EditorGUI.BeginChangeCheck();
         if (EditorGUI.EndChangeCheck()) {
             SceneView.RepaintAll();
@@ -193,16 +203,6 @@ public class LineEditor : Editor {
                 }
                 EditorGUILayout.EndHorizontal();
             }
-        }
-
-        if (GUILayout.Button("+", GUILayout.Width(18))) {
-            Undo.RecordObject(Line, "Point added");
-            Vector3 newPosition = Vector3.zero;
-            if (Line != null && Line.AnchorPoints.Count > 0) {
-                newPosition = Line.AnchorPoints[Line.AnchorPoints.Count - 1].Position + Vector2.right;
-            }
-            Line.AddPointAtTheEnd(newPosition);
-            SceneView.RepaintAll();
         }
     }
 
