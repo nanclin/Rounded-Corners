@@ -52,6 +52,12 @@ public class LineEditor : Editor {
     }
 
     private void OnSceneGUI() {
+
+        // transformations not yet supported
+        Line.transform.position = Vector3.zero;
+        Line.transform.localScale = Vector3.one;
+        Line.transform.rotation = Quaternion.identity;
+
         if (Line.AnchorPoints.Count < 2) return;
 
 //        Debug.Log(string.Format("GUIUtility.hotControl={0}", GUIUtility.hotControl));
