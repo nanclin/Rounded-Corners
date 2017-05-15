@@ -38,7 +38,7 @@ public class AnchorPoint {
     public AnchorPoint(AnchorPoint previousPoint = null, AnchorPoint nextPoint = null) {
         PreviousPoint = previousPoint;
         NextPoint = nextPoint;
-        PointType = PointType.RoundedCorner;
+        PointType = PointType.None;
     }
 
     public void ResetValues() {
