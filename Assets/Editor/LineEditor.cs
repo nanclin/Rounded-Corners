@@ -143,11 +143,6 @@ public class LineEditor : Editor {
             SceneView.RepaintAll();
         }
 
-        EditorGUI.BeginChangeCheck();
-        if (EditorGUI.EndChangeCheck()) {
-            SceneView.RepaintAll();
-        }
-
         for (int i = 0; i < Line.AnchorPoints.Count; i++) {
             AnchorPoint point = Line.AnchorPoints[i];
 
